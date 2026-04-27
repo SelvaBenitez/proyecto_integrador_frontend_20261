@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Inicio de Sesión - Smart Academia</title>
+
+    <link rel="preload" href="../css/normalize.css" as="style">
+    <link rel="stylesheet" href="../css/normalize.css">
+
+    <link rel="preload" href="../css/styles.css" as="style">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <link rel="icon" type="image/png" href="../imagenes/favicon.png">
+</head>
+
+<body>
+
+    <header>
+        <div class="barra-navegacion">
+            <a href="">
+                <h1>Smart <span>Academia</span></h1>
+            </a>
+            <nav>
+                <a href="">Nosotros</a>
+                <a href="">Cursos</a>
+                <a href="inicio-sesion.html">Inicio Sesion</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="login-page">
+        <div class="form-container">
+            <h2>Inicio de Sesión</h2>
+            <form action="#" method="POST">
+                
+                <div class="campo">
+                    <label for="usuario">Usuario o Correo</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario/correo" required>
+                </div>
+
+                <div class="campo">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña" required>
+                </div>
+
+                <div class="campo">
+                    <label>Rol</label>
+                    <div class="opciones-rol">
+                        <input type="radio" id="est" name="rol" value="estudiante">
+                        <label for="est">Estudiante</label>
+
+                        <input type="radio" id="admin" name="rol" value="administrador">
+                        <label for="admin">Administrador</label>
+                    </div>
+                </div>
+
+
+
+                <input type="submit" value="Acceder" class="action-button"> 
+
+            </form>
+
+            <span class="registro-link">¿Aún no tienes una cuenta? <a href="registro.html">Regístrate</a></span>
+
+        </div>
+    </main>
+
+     <footer>
+        <p> © 2025 Aulabot. All rights reserved.</p>
+    </footer>
+
+    <script src="../logica-proyecto.js"></script>
+
+</body>
+</html>

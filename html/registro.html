@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Smart Academia</title>
+
+    <link rel="preload" href="../css/normalize.css" as="style">
+    <link rel="stylesheet" href="../css/normalize.css">
+
+    <link rel="preload" href="../css/styles.css" as="style">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <link rel="icon" type="image/png" href="../imagenes/favicon.png">
+</head>
+<body>
+
+    <header>
+        <div class="barra-navegacion">
+            <a href="">
+                <h1>Smart <span>Academia</span></h1>
+            </a>
+            <nav>
+                <a href="">Nosotros</a>
+                <a href="">Cursos</a>
+                <a href="inicio-sesion.html">Inicio Sesion</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="registro-page">
+        <div class="form-container">
+            <h2>Crear Cuenta</h2>
+            <form action="#" method="POST"> <!-- #: no hay una URL real a donde enviar los datos, se envian a donde JS diga // POST: enviar/crear datos (los datos van ocultos en el body) -->
+                
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
+                </div>
+
+                <div class="campo">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" placeholder="Ingresa tu apellido" required>
+                </div>
+
+                <div class="campo">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" required>
+                </div>
+
+                <div class="campo">
+                    <label for="celular">Celular</label>
+                    <input type="tel" id="celular" name="celular" placeholder="Ej: 300 123 4567" required>
+                </div>
+
+                <div class="campo">
+                    <label>Género</label>
+                    <div class="opciones-rol" style="text-align: center;">
+                        <input type="radio" id="femenino" name="genero" value="femenino" required>
+                        <label for="femenino">Femenino</label>
+                        <input type="radio" id="masculino" name="genero" value="masculino">
+                        <label for="masculino">Masculino</label>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label>Rol</label>
+                    <div class="opciones-rol" style="text-align: center;">
+                        <input type="radio" id="rol_estudiante" name="rol" value="estudiante" required>
+                        <label for="rol_estudiante">Estudiante</label>
+                        <input type="radio" id="rol_admin" name="rol" value="administrador">
+                        <label for="rol_admin">Administrador</label>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
+                </div>
+
+                <input type="submit" value="Registrarse" class="action-button"> 
+
+            </form>
+
+            <span class="inicio_sesion">¿Ya tienes una cuenta? <a href="inicio-sesion.html">Inicia Sesión</a></span>
+    </main>
+
+    <footer>
+        <p> © 2025 Aulabot. All rights reserved.</p>
+    </footer>
+
+    <script src="../logica-proyecto.js"></script>
+
+</body>
+</html>
