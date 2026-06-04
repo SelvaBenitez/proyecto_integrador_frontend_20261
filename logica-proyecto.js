@@ -1,9 +1,3 @@
-// > > > > INICIALIZACIÓN: Cuando la página termine de cargar el HTML, ejecuta: (así garantiza que el DOM ya esté listo)
-document.addEventListener("DOMContentLoaded", () => {
-    manejarRegistro();
-    manejarLogin();
-});
-
 
 // > > > > REGISTRO
 function manejarRegistro() {
@@ -24,17 +18,17 @@ function registrarUsuario() {
     const celular = document.getElementById("celular").value.trim();
     const password = document.getElementById("password").value;
 
-    const rol = document.querySelector('input[name="rol"]:checked')?.value; //usemos querySelector pq verifica varios elemntos y devuelve el primero que coincide
-    const genero = document.querySelector('input[name="genero"]:checked')?.value;
+    const genero = document.querySelector('input[name="genero"]:checked')?.value; // ?: “si existe, obtén el value, si NO existe, devuelve undefined”.
 
-
+    //REVISAR
     if (!nombre || !apellido || !correo || !celular || !password) {
         mostrarMensaje("Todos los campos son obligatorios", "error");
         return;
     }
 
-    if (!rol || !genero) {
-        mostrarMensaje("Debes seleccionar rol y género", "error");
+        //(se quitó el rol del registro)
+    if (!genero) {
+        mostrarMensaje("Debes seleccionar un género", "error");
         return;
     }
 
@@ -44,8 +38,8 @@ function registrarUsuario() {
         correo,
         celular,
         password,
-        rol,
-        genero
+        genero,
+        rol: "estudiante" //por defecto - es el rol con menos permisos
     };
 
     guardarUsuario(usuario);
@@ -90,15 +84,9 @@ function manejarLogin() {
 function iniciarSesion() {
     const entradaUsuario = document.getElementById("usuario").value.trim();
     const entradaPassword = document.getElementById("contrasena").value;
-    const entradaRol = document.querySelector('input[name="rol"]:checked')?.value;
 
     if (!entradaUsuario || !entradaPassword) {
         mostrarMensaje("Debes completar todos los campos", "error");
-        return;
-    }
-
-    if (!entradaRol) {
-        mostrarMensaje("Selecciona un rol", "error");
         return;
     }
 
@@ -108,8 +96,7 @@ function iniciarSesion() {
     for (let i = 0; i < usuarios.length; i++) {
         if (
             usuarios[i].correo === entradaUsuario &&
-            usuarios[i].password === entradaPassword &&
-            usuarios[i].rol === entradaRol
+            usuarios[i].password === entradaPassword
         ) {
             usuarioEncontrado = usuarios[i];
             break;
@@ -119,12 +106,19 @@ function iniciarSesion() {
     if (usuarioEncontrado) {
         localStorage.setItem("usuarioActivo", usuarioEncontrado.correo);
         mostrarMensaje("Inicio de sesión exitoso", "success");
-
         intentos = 0;
 
-        setTimeout(() => {
-            window.location.href = "bienvenida.html";
-        }, 2000); //para que no se nos cambie de una la pag
+        setTimeout(() => { 
+            const rol = usuarioEncontrado.rol; //Redirigimos a las pags dependiendo del rol
+
+            if (rol === "administrador") {
+                window.location.href = "bienvenida-admin.html";
+            } else if (rol === "profesor") {
+                window.location.href = "bienvenida-profesor.html";
+            } else {
+                window.location.href = "bienvenida-estudiante.html";
+            }
+        }, 2000);
 
     } else {
         intentos++;
@@ -134,12 +128,12 @@ function iniciarSesion() {
 
 
         } else {
-            mostrarMensaje(`Credenciales incorrectas (Intento ${intentos}/3)`);
+            mostrarMensaje(`Credenciales incorrectas (Intento ${intentos}/3)`, "error");
         }
     }
 }
 
-// Mensajes
+// MENSAJESS
 function mostrarMensaje(texto, tipo) {
     eliminarMensajePrevio();
 
@@ -172,9 +166,6 @@ function eliminarMensajePrevio() {
 
 
 // > > > >  BIENVENIDA
-document.addEventListener("DOMContentLoaded", () => {
-    mostrarBienvenida();
-});
 
 function mostrarBienvenida() {
     const elemento = document.getElementById("bienvenida");
@@ -183,10 +174,76 @@ function mostrarBienvenida() {
 
     const correo = localStorage.getItem("usuarioActivo");
 
-    if (!usuario) {
+    if (!correo) {
         window.location.href = "inicio-sesion.html";
         return;
     }
 
     elemento.textContent = `¡Bienvenido!`;
 }
+
+
+//JSON
+async function cargarUsuariosIniciales() {
+    try {
+        const respuesta = await fetch("../usuarios.json");
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo cargar el archivo con los usuarios.");
+        }
+
+        const usuariosJson = await respuesta.json();
+        const usuariosLocal = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+        // Agrega del JSON solo los usuarios que aún no están en localStorage
+        usuariosJson.forEach(uj => {
+            const yaExiste = usuariosLocal.some(ul => ul.correo === uj.correo);
+            if (!yaExiste) {
+                usuariosLocal.push(uj);
+            }
+        });
+
+        localStorage.setItem("usuarios", JSON.stringify(usuariosLocal));
+
+    } catch (error) {
+        console.error("Error al cargar usuarios", error.message);
+    }
+}
+
+
+//MOSTRAR USUARIOS EN LA TABLA DEL ADMIN
+function mostrarUsuariosEnTabla(usuarios) { //usuarios: array
+    const cuerpoTabla = document.getElementById("tabla-usuarios-body");
+
+    if (!cuerpoTabla) return; // por si no existe el elemento, nos salimos
+
+    cuerpoTabla.innerHTML = ""; // Limpiamos filas que hay en el html, si es que hay
+
+    usuarios.forEach(u => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <td>${u.nombre} ${u.apellido}</td>
+            <td>${u.correo}</td>
+            <td>${u.password}</td>
+            <td>${u.celular}</td>
+            <td>${u.rol}</td>
+        `;
+        cuerpoTabla.appendChild(fila); //insertamos la fila en la tabla
+    });
+}
+
+//-----------------------------------------------------
+
+// > > > > INICIALIZACIÓN de la app: Cuando la página termine de cargar el HTML, ejecuta: (así garantiza que el DOM ya esté listo)
+
+document.addEventListener("DOMContentLoaded", async () => {
+    manejarRegistro();
+    manejarLogin();
+    mostrarBienvenida();
+
+    if (document.querySelector("#tabla-usuarios-body")) {
+        await cargarUsuariosIniciales();
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        mostrarUsuariosEnTabla(usuarios);
+    }
+});

@@ -1,0 +1,56 @@
+[
+  {
+    "nombre": "Juliana",
+    "apellido": "Osorio",
+    "correo": "july.osorio@hotmail.com",
+    "celular": "3192274009",
+    "genero": "femenino",
+    "password": "al280710",
+    "rol": "administrador"
+  },
+  {
+    "nombre": "Selva",
+    "apellido": "Benitez",
+    "correo": "Selva.benitezp05@gmail.com",
+    "celular": "3108855813",
+    "genero": "femenino",
+    "password": "1234xyz.",
+    "rol": "administrador"
+  },
+  {
+    "nombre": "Andres",
+    "apellido": "Escobar",
+    "correo": "andres.24.as@gmail.com",
+    "celular": "3244595443",
+    "genero": "masculino",
+    "password": "Andres123",
+    "rol": "administrador"
+  },
+  {
+    "nombre": "Ana",
+    "apellido": "García",
+    "correo": "ana-garcia-ejemplo@gmail.com",
+    "celular": "3001112233",
+    "genero": "femenino",
+    "password": "12345",
+    "rol": "estudiante"
+  },
+  {
+    "nombre": "Carlos",
+    "apellido": "Martínez",
+    "correo": "carlos-martinez-ejemplo@gmail.com",
+    "celular": "3114445566",
+    "genero": "masculino",
+    "password": "12345",
+    "rol": "estudiante"
+  },
+  {
+    "nombre": "Adrian",
+    "apellido": "Lopez",
+    "correo": "adrian-lopez-ejemplo@gmail.com",
+    "celular": "3114750566",
+    "genero": "masculino",
+    "password": "12345",
+    "rol": "profesor"
+  }
+]
