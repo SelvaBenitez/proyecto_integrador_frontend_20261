@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Smart Academia</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="image/png" href="../imagenes/img-index/Icono.jpg">
+</head>
+<body class="dashboard-body">
+
+    <header>
+        <div class="barra-navegacion">
+            <a href="../html/index.html">
+                <h1>Smart <span>Academia</span></h1>
+            </a>
+            <nav>
+                <a href="../html/inicio-sesion.html" class="btn-cerrar-sesion">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#usuarios" class="activo">👥 Control Usuarios</a></li>
+                <li><a href="#asistencias">📅 Asistencias Globales</a></li>
+                <li><a href="#calendario">📆 Calendario General</a></li>
+                <li><a href="#reuniones">💻 Aulas Virtuales</a></li>
+                <li><a href="#pqr">📩 Bandeja PQR</a></li>
+                <li><a href="#ayuda">❓ Soporte Técnico</a></li>
+                <li class="menu-cuenta"><a href="#cuenta">👤 Mi Cuenta</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-content">
+            <div class="bienvenida-contenedor">
+                <h2>¡Panel de Control Administrativo! 🛠️</h2>
+                <p>Bienvenido, Administrador. Desde aquí puedes gestionar los accesos, contraseñas y asignar roles en la plataforma.</p>
+            </div>
+
+            <section class="admin-table-container" style="background: #ffffff; padding: 2.5rem; border-radius: 15px; box-shadow: var(--sombra-card); border: 1px solid var(--color-borde); overflow-x: auto;">
+                <h3 style="font-size: 2rem; color: var(--color-primario); margin-bottom: 2rem;">Listado de Usuarios Registrados</h3>
+                
+                <table style="width: 100%; border-collapse: collapse; font-size: 1.4rem; text-align: left;">
+                    <thead>
+                        <tr style="background-color: var(--color-primario); color: white;">
+                            <th style="padding: 1.2rem;">Nombre Completo</th>
+                            <th style="padding: 1.2rem;">Correo Electrónico</th>
+                            <th style="padding: 1.2rem;">Contraseña</th>
+                            <th style="padding: 1.2rem;">Celular</th>
+                            <th style="padding: 1.2rem;">Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-usuarios-body">
+                        </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Aulabot. All rights reserved.</p>
+    </footer>
+</body>
+<script src="../logica-proyecto.js"></script>
+</html>
